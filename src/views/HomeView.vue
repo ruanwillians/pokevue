@@ -1,18 +1,70 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <Search-form/>
+    <div v-if="pokemon.length == 0">
+      <img src="https://www.pngplay.com/wp-content/uploads/10/Pokemon-Transparent-File.png" id="imageIntro"/>
+    </div>
+      <div class="cards">
+        <PokeCard />
+      </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import SearchForm from "../components/SearchForm";
+import PokeCard from "../components/PokeCard.vue";
+import {PokeStore} from '../store/PokeStore'
 
 export default {
-  name: 'HomeView',
+  setup(){
+    const store = PokeStore()
+    const pokemon = store.getPokemon
+    return {store, pokemon}
+  },
+  name: "App",
   components: {
-    HelloWorld
+    SearchForm,
+    PokeCard,
+  },
+
+};
+</script>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#imageIntro {
+  margin-top: 2em;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo{
+  display: flex;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  #imageIntro {
+    width: 20em;
+    height: 20em;
   }
 }
-</script>
+
+
+</style>

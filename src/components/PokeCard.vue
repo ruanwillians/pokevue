@@ -1,63 +1,50 @@
 <template>
-
-    <ul >
-      <li v-for="data in pokemon" :key="data.name">
+  <div class="container">
+    <ul>
+      <li v-for="data in pokemon" :key="data.name" class="animate__animated animate__backInUp">
         <div class="card">
           <img :src="data.sprites.front_default"/>
           <h3>Name: <span>{{data.name}}</span></h3>
-          <button class="pokeapi-button">Ver detalhes</button>
+          <button class="pokeapi-button" @click="redirect(data.name)"> Ver detalhes</button>
         </div>
       </li>
-      <li v-for="data in evolutions" :key="data.name">
+      <li v-for="data in evolutions" :key="data.name" class="animate__animated animate__backInUp" >
         <div class="card">
           <img :src="data.sprites.front_default"/>
           <h3>Name: <span>{{data.name}}</span></h3>
-          <button class="pokeapi-button">Ver detalhes</button>
+          <button class="pokeapi-button" @click="redirect(data.name)"> Ver detalhes</button>
         </div>
       </li>
     </ul>
+  </div>
 
 </template>
 
 <script>
-import axios from "axios";
+import {PokeStore} from '../store/PokeStore'
+import 'animate.css/animate.min.css'
 
 export default {
-  data() {
-    return {
-      pokemon: [],
-      evolutions: [],
-    };
+
+  setup(){
+    const store = PokeStore()
+    const pokemon = store.getPokemon
+    const evolutions = store.getEvolutions
+    return {store, pokemon, evolutions}
   },
 
-  mounted() {
-    axios
-      .get("https://pokeapi.co/api/v2/pokemon/poliwag")
-      .then((response) => {
-        this.pokemon.push(response.data);
-        return axios.get(response.data.species.url);
-      })
-      .then(response => {
-        const evolutionChainUrl = response.data.evolution_chain.url;
+  methods: {
+    redirect(name){
+      this.$router.push({path:`/${name}`})
+    }
+  }
 
-        return axios.get(evolutionChainUrl);
-      })
-      .then(response => {
-        const evolutionsName = response.data.chain.evolves_to[0].species.name//.map (evolution => {
-        return axios.get(`https://pokeapi.co/api/v2/pokemon/${evolutionsName}`)
-      })
-      .then((response) => {
-        this.evolutions.push(response.data)
-        console.log(this.evolutions)
-      })
-      .catch((err) => {
-        return err;
-      });
-  },
 };
 </script>
 
 <style>
+
+
 ul {
 display: flex;
 flex-wrap: wrap;
@@ -105,13 +92,12 @@ li {
 }
 
 .card button {
-  width: 300px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   background-color: rgb(84, 135, 192);
   color: white;
-  font-size: 30px;
+  font-size: 50px;
   font-weight: bold;
-  border-radius: 25px;
   border: none;
   cursor: pointer;
   margin-top: 0.9em 
@@ -125,7 +111,9 @@ li {
   opacity: 0.7;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
+
+  
   .card {
     width: 220px;
     height: 320px;
@@ -135,16 +123,8 @@ li {
     margin: 0;
   }
 
-  .card button {
-    width: 125px;
-  height: 50px;
-  font-size: 15px;
-    margin-bottom: .9em;
-    border-radius: 8px;
-  }
-
   .card h3 {
-    font-size: 23px;
+    font-size: 20px;
     margin-top: .5em;
   }
 }

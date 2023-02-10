@@ -1,13 +1,38 @@
 <template>
-   <div class="addTask">
+  <div>
+    <div class="addTask">
     <input type="text" placeholder="Pesquise um pokemon" v-model="name"/>
-    <button class="btn" @click="add"><i class="fas fa-search"></i></button>
+    <button class="btn" @click="submit"><i id="icone" class="fas fa-search"></i></button>
   </div>
+  <div>
+    <p v-if="error.length > 0">Pokemon não encontrado, verifique o nome ou o Id</p>
+  </div>
+  </div>
+  
 </template>
 
-<script>7
+<script>
+import {PokeStore} from '../store/PokeStore'
 
 export default {
+  setup(){
+    const store = PokeStore()
+    const error = store.getError
+    return {store, error}
+  },
+  data(){
+    return {
+      name: ''
+    }
+  },
+  methods: {
+    submit(){
+      this.store.deleteError()
+      this.store.setInput(this.name.toLowerCase())
+      this.store.deletePoke()
+      this.store.setPoke()
+    }
+  },
 
 }
 </script>
@@ -19,7 +44,7 @@ export default {
   margin-bottom: 2em;
 }
 .addTask input {
-  width: 40%;
+  width: 1200px;
   height: 90px;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -44,7 +69,20 @@ export default {
   height: 150px;
 }
 
-@media (max-width: 600px) {
+#icone{
+  font-size: 30px;
+}
+
+h1 {
+  color: #fff;
+}
+
+p {
+  color: rgb(255, 0, 0);
+  font-size: 30px;
+}
+
+@media (max-width: 900px) {
   .addTask .btn{
     height: 40px;
     width: 3em;
@@ -55,5 +93,14 @@ export default {
     font-size: 18px;
     width: 250px;
   }
+
+  p {
+  font-size: 15px;
+}
+
+
+  #icone{
+  font-size: 20px;
+}
 }
 </style>
