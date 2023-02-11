@@ -1,7 +1,7 @@
 <template>
   <div class="containerHome">
     <ul>
-      <li v-for="data in pokemon" :key="data.name" class="animate__animated animate__backInUp">
+      <li v-for="data in pokemon" :key="data.name" class="animate__animated animate__flipInY">
         <div class="card">
           <img :src="data.sprites.front_default"/>
           <h1>Name: <span>{{data.name}}</span></h1>
@@ -9,7 +9,7 @@
           <button v-else class="pokeapi-button" @click="redirect(data.name)"> Voltar</button>
         </div>
       </li>
-      <li v-for="data in evolutions" :key="data.name" class="animate__animated animate__backInUp" >
+      <li v-for="data in evolutions" :key="data.name" class="animate__animated animate__flipInY" >
         <div class="card">
           <img :src="data.sprites.front_default"/>
           <h1>Name: <span>{{data.name}}</span></h1>
@@ -64,6 +64,8 @@ padding: 0;
 
 li {
     list-style: none;
+    --animate-duration: 0.8s;
+
 }
 
 .card {

@@ -5,7 +5,7 @@
     <button class="btn" @click="submit"><i id="icone" class="fas fa-search"></i></button>
   </div>
   <div>
-    <p v-if="error.length > 0">{{ error[0] }}</p>
+    <p v-if="error.length > 0">{{ error[0].message }}</p>
   </div>
   </div>
   
@@ -31,7 +31,7 @@ export default {
       this.store.setInput(this.name.toLowerCase())
       this.store.deletePoke()
       this.store.setPoke()
-    }
+    },
   },
 
 }

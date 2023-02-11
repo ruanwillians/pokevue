@@ -161,7 +161,7 @@ h1 {
   }
 
   .attributes {
-    width: 4.5em;
+    width: 3em;
   }
 
   .attributes span {
@@ -171,7 +171,6 @@ h1 {
   ul {
     display: flex;
     flex-direction: row;
-  
   }
 }
 </style>
