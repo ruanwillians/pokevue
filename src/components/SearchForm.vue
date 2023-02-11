@@ -5,7 +5,7 @@
     <button class="btn" @click="submit"><i id="icone" class="fas fa-search"></i></button>
   </div>
   <div>
-    <p v-if="error.length > 0">Pokemon não encontrado, verifique o nome ou o Id</p>
+    <p v-if="error.length > 0">{{ error[0] }}</p>
   </div>
   </div>
   
@@ -44,13 +44,13 @@ export default {
   margin-bottom: 2em;
 }
 .addTask input {
-  width: 1200px;
-  height: 90px;
+  width: 600px;
+  height: 40px;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   border: 1px solid #fff;
   padding: .2em;
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .addTask .btn{
@@ -70,7 +70,7 @@ export default {
 }
 
 #icone{
-  font-size: 30px;
+  font-size: 20px;
 }
 
 h1 {
@@ -79,7 +79,7 @@ h1 {
 
 p {
   color: rgb(255, 0, 0);
-  font-size: 30px;
+  font-size: 15px;
 }
 
 @media (max-width: 900px) {

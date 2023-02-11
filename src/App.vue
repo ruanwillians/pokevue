@@ -24,14 +24,21 @@ export default {
   min-width: 100vw;
   color: #2c3e50;
   background: linear-gradient(to right, rgb(22, 34, 42), rgb(58, 96, 115));
+  overflow-x: hidden; 
 }
 
 #logo img {
-  margin: 4em;
-  width: 40em;
+  margin: 1.5em;
+  width: 18em;
 }
 
 @media (max-width: 900px) {
+
+  #app {
+    min-height: 100vh;
+    min-width: 100vw;
+  }
+
   #logo img {
   width: 15em;
 }}

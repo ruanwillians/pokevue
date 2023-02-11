@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="containerHome">
     <Search-form/>
     <div v-if="pokemon.length == 0">
       <img src="https://www.pngplay.com/wp-content/uploads/10/Pokemon-Transparent-File.png" id="imageIntro"/>
@@ -38,11 +38,13 @@ export default {
 }
 
 #imageIntro {
-  margin-top: 2em;
+  margin-top: .5em;
+  width: 300px;
+  height: 300px;
 }
 
 
-.container {
+.containerHome {
   display: flex;
   flex-direction: column;
   justify-content: center;

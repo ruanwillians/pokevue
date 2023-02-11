@@ -1,17 +1,18 @@
 <template>
-  <div class="container">
+  <div class="containerHome">
     <ul>
       <li v-for="data in pokemon" :key="data.name" class="animate__animated animate__backInUp">
         <div class="card">
           <img :src="data.sprites.front_default"/>
-          <h3>Name: <span>{{data.name}}</span></h3>
-          <button class="pokeapi-button" @click="redirect(data.name)"> Ver detalhes</button>
+          <h1>Name: <span>{{data.name}}</span></h1>
+          <button v-if="$route.path === '/'" class="pokeapi-button" @click="redirect(data.name)"> Ver detalhes</button>
+          <button v-else class="pokeapi-button" @click="redirect(data.name)"> Voltar</button>
         </div>
       </li>
       <li v-for="data in evolutions" :key="data.name" class="animate__animated animate__backInUp" >
         <div class="card">
           <img :src="data.sprites.front_default"/>
-          <h3>Name: <span>{{data.name}}</span></h3>
+          <h1>Name: <span>{{data.name}}</span></h1>
           <button class="pokeapi-button" @click="redirect(data.name)"> Ver detalhes</button>
         </div>
       </li>
@@ -34,8 +35,14 @@ export default {
   },
 
   methods: {
+
     redirect(name){
-      this.$router.push({path:`/${name}`})
+      if(this.$route.path === '/'){
+        this.$router.push({path:`/${name}`})
+      } else {
+        this.$router.push({path:`/`})
+      }
+      
     }
   }
 
@@ -43,22 +50,25 @@ export default {
 </script>
 
 <style>
-
-
+.containerHome {
+  display: flex;
+  justify-content: center;
+}
 ul {
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
+margin: 0;
+padding: 0;
 }
 
 li {
-    padding: 10px;
-    margin: 10px;
     list-style: none;
 }
+
 .card {
-  width: 500px;
-  height: 580px;
+  width: 280px;
+  height: 370px;
   background-color: #fff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 10px;
@@ -66,7 +76,7 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 15px;
+  margin: 5px;
 }
 
 .card img {
@@ -76,8 +86,8 @@ li {
   margin: .5em;
 }
 
-.card h3 {
-  font-size: 35px;
+.card h1 {
+  font-size: 25px;
   color: #333;
 }
 
@@ -96,7 +106,7 @@ li {
   height: 100%;
   background-color: rgb(84, 135, 192);
   color: white;
-  font-size: 50px;
+  font-size: 20px;
   font-weight: bold;
   border: none;
   cursor: pointer;
