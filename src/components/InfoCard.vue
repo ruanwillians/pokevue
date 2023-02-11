@@ -160,8 +160,12 @@ h1 {
     justify-content: center;
   }
 
+  .card {
+    height: 300px;
+  }
+
   .attributes {
-    width: 3em;
+    width: 4.5em;
   }
 
   .attributes span {

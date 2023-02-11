@@ -128,7 +128,7 @@ li {
   
   .card {
     width: 220px;
-    height: 320px;
+    height: 300px;
   }
 
   .card img {
